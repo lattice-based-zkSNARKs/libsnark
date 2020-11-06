@@ -259,11 +259,11 @@ qap_witness<FieldT> r1cs_to_qap_witness_map(const r1cs_constraint_system<FieldT>
     libff::leave_block("Compute ZK-patch");
 
     libff::enter_block("Compute evaluation of polynomial A on set T");
-    domain->cosetFFT(aA, FieldT::multiplicative_generator);
+    domain->cosetFFT(aA, domain->get_coset());
     libff::leave_block("Compute evaluation of polynomial A on set T");
 
     libff::enter_block("Compute evaluation of polynomial B on set T");
-    domain->cosetFFT(aB, FieldT::multiplicative_generator);
+    domain->cosetFFT(aB, domain->get_coset());
     libff::leave_block("Compute evaluation of polynomial B on set T");
 
     libff::enter_block("Compute evaluation of polynomial H on set T");
@@ -290,7 +290,7 @@ qap_witness<FieldT> r1cs_to_qap_witness_map(const r1cs_constraint_system<FieldT>
     libff::leave_block("Compute coefficients of polynomial C");
 
     libff::enter_block("Compute evaluation of polynomial C on set T");
-    domain->cosetFFT(aC, FieldT::multiplicative_generator);
+    domain->cosetFFT(aC, domain->get_coset());
     libff::leave_block("Compute evaluation of polynomial C on set T");
 
 #ifdef MULTICORE
@@ -308,7 +308,7 @@ qap_witness<FieldT> r1cs_to_qap_witness_map(const r1cs_constraint_system<FieldT>
     libff::leave_block("Compute evaluation of polynomial H on set T");
 
     libff::enter_block("Compute coefficients of polynomial H");
-    domain->icosetFFT(H_tmp, FieldT::multiplicative_generator);
+    domain->icosetFFT(H_tmp, domain->get_coset());
     libff::leave_block("Compute coefficients of polynomial H");
 
     libff::enter_block("Compute sum of H and ZK-patch");
